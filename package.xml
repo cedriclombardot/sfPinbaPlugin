@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.7.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sfPinbaPlugin</name>
+ <channel>plugins.symfony-project.org</channel>
+ <summary>Allow to monitor each HTTP request to a symfony project with Pinba (http://pinba.org/wiki/Main_Page)</summary>
+ <description>Allow to monitor each HTTP request to a symfony project with Pinba (http://pinba.org/wiki/Main_Page)</description>
+ <lead>
+  <name>Mickael HOAREAU</name>
+  <user>mhoareau</user>
+  <email>mickael.hoareau@bysoft.fr</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-11-24</date>
+ <time>02:57:48</time>
+ <version>
+  <release>1.0.1</release>
+  <api>1.0.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.symfony-project.org/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="40854c3094d0af3f017cb720e38d30de" name="lib/sfPinbaStartFilter.php" role="data"/>
+   <file md5sum="fa864e902b4613eff88d6eea6135b4af" name="lib/sfPinbaStopFilter.php" role="data"/>
+   <file md5sum="762f1dfc4c3b7b7e4cb73f6bcd81f883" name="lib/sfPinbaContext.class.php" role="data"/>
+   <file md5sum="ca069b7ece7afe12f0c19779e29c4b21" name="config/sfPinbaPluginConfiguration.class.php" role="data"/>
+   <file md5sum="70114b5b557c10a359e93513e092d968" name="config/app.yml" role="data"/>
+   <file md5sum="d41d8cd98f00b204e9800998ecf8427e" name="LICENSE" role="data"/>
+   <file md5sum="2521feb8dca092a2883f2628232d7603" name="README" role="data"/>
+   <file md5sum="294bc4cce7ea02760d1edc057db91c6e" name="sfPinbaPlugin-1.0.0.tgz" role="data"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.4</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   
+  </required>
+ </dependencies>
+ <phprelease/>
+ <changelog/>
+</package>

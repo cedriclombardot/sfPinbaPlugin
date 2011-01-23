@@ -1,0 +1,7 @@
+all:
+  pinba:
+    enabled: true
+  
+#    modules: #  monitored modules, if ~ it will monitored all 
+# moduleName: [action1, action2] #it will monitor action1 and action2
+# moduleName: true               #it will monitor all the modules    

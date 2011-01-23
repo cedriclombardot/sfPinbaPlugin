@@ -1,0 +1,35 @@
+Description:
+========
+
+This plugin allow to send data formated to pinba server (http://pinba.org/wiki/Manual).
+The data will send with the following tags: module name and action name.
+
+
+Configuration:
+========
+
+1.Enable in filters.yml
+
+
+     pinba:
+       class: sfPinbaStartFilter
+
+
+2.Set the module/action to monitor in config/app.yml
+
+
+    pinba:
+      enabled: true
+      #monitored modules, if ~ it will monitored all  
+      # moduleName: [action1, action2] #it will monitor action1 and action2
+      modules: 
+        moduleName: [actionName1]
+
+All the module can be monitored
+
+     pinba:
+        enabled: true
+        modules:
+          moduleName: true
+
+If the modules parameters is not specified, all the modules will be monitored.
