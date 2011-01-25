@@ -33,7 +33,10 @@ class sfPinbaPropelPDOStatement extends DebugPDOStatement{
 	
 	protected function getOperationFromQuery(){
 		preg_match('/^(SELECT|UPDATE|INSERT|DELETE)/i',$this->getExecutedQueryString(),$matches);
-		return strtolower($matches[1]);
+		if(count($matches)>0){
+			return strtolower($matches[1]);
+		}
+		return 'other';
 	}
 	
 }
