@@ -29,6 +29,38 @@ class sfPinbaContext
     	}
     }
  
+    /**
+     * Change the pinba_script_name_set
+     * @param string $script_name the new script name
+     * @return sfPinbaContext the current context
+     */
+    public function setScriptName($script_name){
+    	pinba_script_name_set($script_name);
+    	return $this;
+    }
+    
+    /**
+     * Start pinba timer
+     * @see pinba_timer_start 
+     * execute pinba_timer_start
+     * @param $tags array of tags
+     * @return $ressource timer
+     */
+    public function start($tags=null){
+    	return pinba_timer_start($tags);
+    }
+    
+    
+	/**
+     * Stop pinba timer
+     * @see pinba_timer_stop
+     * execute pinba_timer_stop
+     * @param Resource $timer
+     * @return boolean 
+     */
+    public function stop($timer){
+    	return pinba_timer_stop($timer);
+    }
     
     public function startTimerForRequest() {
     	if (sfConfig::get("app_pinba_enabled")) {
@@ -58,7 +90,7 @@ class sfPinbaContext
 	    	}
 	    	
 			if ($startTimer) {
-	    		pinba_timer_start($option);
+	    		$this->start($option);
 	    	} 
     	}
     }

@@ -13,6 +13,11 @@ Configuration:
 
      pinba:
        class: sfPinbaStartFilter
+       
+Or by request URI
+
+     pinba:
+       class: sfPinbaScriptNameFilter
 
 
 2.Set the module/action to monitor in config/app.yml
@@ -33,3 +38,16 @@ All the module can be monitored
           moduleName: true
 
 If the modules parameters is not specified, all the modules will be monitored.
+
+
+Propel 1.5 Configuration
+========
+
+You can count Propel15 requests using in your databases.yml :
+
+all:
+  propel:
+    param:
+      classname:  sfPinbaPropelPDO
+      
+It will create tags operation (SELECT, UPDATE, ....) dbname (for the database name) & group (oracle, mysql ...)
