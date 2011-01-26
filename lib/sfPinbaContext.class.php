@@ -23,19 +23,21 @@ class sfPinbaContext
  
     // Do not allow an explicit call of the constructor: $v = new Singleton();
     final private function __construct() {
-    	
-    	if (sfConfig::get("app_pinba_enabled") && !extension_loaded('pinba')) {
-    		throw new Exception("The plugin sfPinbaPlugin required the pinba extension");
-    	}
     }
- 
+
+    public function isEnabled(){
+      return (sfConfig::get("app_pinba_enabled") && extension_loaded('pinba'));
+    }
+
     /**
      * Change the pinba_script_name_set
      * @param string $script_name the new script name
      * @return sfPinbaContext the current context
      */
     public function setScriptName($script_name){
-    	pinba_script_name_set($script_name);
+        if($this->isEnabled()){
+          pinba_script_name_set($script_name);
+        }
     	return $this;
     }
     
@@ -47,7 +49,10 @@ class sfPinbaContext
      * @return $ressource timer
      */
     public function start($tags=null){
-    	return pinba_timer_start($tags);
+        if($this->isEnabled()){
+          return pinba_timer_start($tags);
+        }
+        return false;
     }
     
     
@@ -59,7 +64,10 @@ class sfPinbaContext
      * @return boolean 
      */
     public function stop($timer){
-    	return pinba_timer_stop($timer);
+        if($this->isEnabled()){
+          return pinba_timer_stop($timer);
+        }
+        return false;
     }
     
     public function startTimerForRequest() {
