@@ -11,10 +11,10 @@ class sfPinbaPropelPDO extends DebugPDO{
 		
 		$this->configureStatementClass('sfPinbaPropelPDOStatement');
 		
-		if(!in_array($this->getAttribute(PDO::ATTR_DRIVER_NAME),array('oci','oracle'))){
-			$this->setDbNameFromDsn($dsn);
-		}else{
+		if($this->getAttribute(PDO::ATTR_DRIVER_NAME)=='oci'){
 			$this->dbname=$username;
+		}else{
+			$this->setDbNameFromDsn($dsn);
 		}
 	}
 	
