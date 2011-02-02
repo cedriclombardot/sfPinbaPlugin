@@ -11,13 +11,17 @@ class sfPinbaContext
 			self::$_instance = new sfPinbaContext();         
         }
 
-        if (self::$_request  === NULL) {            	
-    		self::$_request = sfContext::getInstance()->getRequest();
+        if(sfContext::hasInstance()){
+            
+            if (self::$_request  === NULL) {            	
+        		self::$_request = sfContext::getInstance()->getRequest();
+            }
+    		if (self::$_sfUser  === NULL) {
+    		     self::$_sfUser    = sfContext::getInstance()->getUser();
+    		} 
+        }else{
+    	  sfConfig::set("app_pinba_enabled",0);
         }
-		if (self::$_sfUser  === NULL) {
-		     self::$_sfUser    = sfContext::getInstance()->getUser();
-		} 
-        
         return self::$_instance;
     }
  
