@@ -6,6 +6,10 @@ class sfPinbaContext
 	protected static $_sfUser;
     protected static $_instance;
  
+    /**
+     * Get the pinba context instance
+     * @return sfPinbaContext
+     */
     public static function getInstance() {
         if (!isset(self::$_instance)) {
 			self::$_instance = new sfPinbaContext();         
@@ -25,10 +29,17 @@ class sfPinbaContext
         return self::$_instance;
     }
  
-    // Do not allow an explicit call of the constructor: $v = new Singleton();
+    /**
+     * 
+     * Do not allow an explicit call of the constructor: $v = new Singleton();
+     */
     final private function __construct() {
     }
 
+    /**
+     * Check if pinba is enabled
+     * @return boolean
+     */
     public function isEnabled(){
       return (sfConfig::get("app_pinba_enabled") && extension_loaded('pinba'));
     }
@@ -74,6 +85,9 @@ class sfPinbaContext
         return false;
     }
     
+    /**
+     * Start pinba timer
+     */
     public function startTimerForRequest() {
     	if (sfConfig::get("app_pinba_enabled")) {
 	    	$option = array(
@@ -107,6 +121,8 @@ class sfPinbaContext
     	}
     }
     
-    // Do not allow the clone operation: $x = clone $v;
+    /**
+     * Do not allow the clone operation: $x = clone $v;
+     */ 
     final protected function __clone() { }
 }
