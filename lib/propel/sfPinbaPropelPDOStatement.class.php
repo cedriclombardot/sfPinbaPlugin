@@ -22,6 +22,9 @@ class sfPinbaPropelPDOStatement extends DebugPDOStatement{
 		return $return;
 	}
 	
+	/**
+	 * Start a timer for query
+	 */
 	protected function startPinbaTimer(){
 		$tags= array(
 			'group'=>$this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME),
@@ -31,6 +34,10 @@ class sfPinbaPropelPDOStatement extends DebugPDOStatement{
 		$this->timer = sfPinbaTimerManager::getTimer('sfPinbaPropelPDOStatement', $tags);
 	}
 	
+	/**
+	 * Get pinba tag for operation query
+	 * @return string
+	 */
 	protected function getOperationFromQuery(){
 		preg_match('/^(SELECT|UPDATE|INSERT|DELETE)/i',$this->getExecutedQueryString(),$matches);
 		if(count($matches)>0){
