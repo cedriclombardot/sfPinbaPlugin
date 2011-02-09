@@ -5,6 +5,10 @@
  */
 class sfPinbaStartFilter extends sfFilter
 {
+  /**
+   * Start timer for page
+   * @param sfFilterChain $filterChain
+   */
   public function execute($filterChain)
   {
   	
