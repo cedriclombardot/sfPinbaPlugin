@@ -2,7 +2,7 @@
 
 /**
  * sfPinbaPlugin configuration.
- * 
+ *
  * @package     sfPinbaPlugin
  * @subpackage  config
  * @author      Bysoft
@@ -17,5 +17,14 @@ class sfPinbaPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
+      $this->dispatcher->connect('command.pre_command', array(
+          new sfPinbaCommandEventListener(),
+          'onPreCommand'
+      ));
+
+      $this->dispatcher->connect('command.post_command', array(
+          new sfPinbaCommandEventListener(),
+          'onPostCommand'
+      ));
   }
 }

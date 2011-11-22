@@ -1,39 +1,41 @@
-<?php 
-class sfPinbaContext  
+<?php
+
+class sfPinbaContext
 {
-	
+
 	protected static $_request;
 	protected static $_sfUser;
     protected static $_instance;
- 
+
     /**
      * Get the pinba context instance
      * @return sfPinbaContext
      */
     public static function getInstance() {
         if (!isset(self::$_instance)) {
-			self::$_instance = new sfPinbaContext();         
+			self::$_instance = new sfPinbaContext();
+
+            if(sfContext::hasInstance()){
+
+                if (self::$_request  === NULL) {
+            		self::$_request = sfContext::getInstance()->getRequest();
+                }
+        		if (self::$_sfUser  === NULL) {
+        		     self::$_sfUser    = sfContext::getInstance()->getUser();
+        		}
+            }else{
+        	  sfConfig::set("app_pinba_enabled",0);
+            }
         }
 
-        if(sfContext::hasInstance()){
-            
-            if (self::$_request  === NULL) {            	
-        		self::$_request = sfContext::getInstance()->getRequest();
-            }
-    		if (self::$_sfUser  === NULL) {
-    		     self::$_sfUser    = sfContext::getInstance()->getUser();
-    		} 
-        }else{
-    	  sfConfig::set("app_pinba_enabled",0);
-        }
         return self::$_instance;
     }
- 
+
     /**
-     * 
+     *
      * Do not allow an explicit call of the constructor: $v = new Singleton();
      */
-    final private function __construct() {
+    final protected function __construct() {
     }
 
     /**
@@ -55,10 +57,10 @@ class sfPinbaContext
         }
     	return $this;
     }
-    
+
     /**
      * Start pinba timer
-     * @see pinba_timer_start 
+     * @see pinba_timer_start
      * execute pinba_timer_start
      * @param $tags array of tags
      * @return $ressource timer
@@ -69,14 +71,14 @@ class sfPinbaContext
         }
         return false;
     }
-    
-    
+
+
 	/**
      * Stop pinba timer
      * @see pinba_timer_stop
      * execute pinba_timer_stop
      * @param Resource $timer
-     * @return boolean 
+     * @return boolean
      */
     public function stop($timer){
         if($this->isEnabled()){
@@ -84,7 +86,7 @@ class sfPinbaContext
         }
         return false;
     }
-    
+
     /**
      * Start pinba timer
      */
@@ -94,15 +96,15 @@ class sfPinbaContext
 	    		"module" => self::$_request->getParameter("module"),
 	    		"action" => self::$_request->getParameter("action"),
 	    	);
-	    	
+
 	    	$modules = sfConfig::get("app_pinba_modules");
-	    	
+
 	    	if (!empty($modules[$option['module']])) {
 	    		$actionsEnabled = $modules[$option['module']];
 	    	} else {
 	    		$actionsEnabled = null;
 	    	}
-	    	
+
 	    	$startTimer = false;
 	    	//No modules are specified, we monitor all the modules
 	    	if (empty($modules)) {
@@ -114,15 +116,15 @@ class sfPinbaContext
 	    		//A module is specified, but the action is not, so we monitor all the actions
 	    		$startTimer = true;
 	    	}
-	    	
+
 			if ($startTimer) {
 	    		$this->start($option);
-	    	} 
+	    	}
     	}
     }
-    
+
     /**
      * Do not allow the clone operation: $x = clone $v;
-     */ 
+     */
     final protected function __clone() { }
 }
